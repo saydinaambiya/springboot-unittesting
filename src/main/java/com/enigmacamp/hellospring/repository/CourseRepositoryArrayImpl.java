@@ -1,6 +1,7 @@
 package com.enigmacamp.hellospring.repository;
 
 import com.enigmacamp.hellospring.model.Course;
+import com.enigmacamp.hellospring.util.GetMethodReflection;
 import com.enigmacamp.hellospring.util.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,7 +14,7 @@ import java.util.Optional;
 public class CourseRepositoryArrayImpl implements CourseRepository {
     @Autowired
     RandomStringGenerator randomStringGenerator;
-    private List<Course> courses = new ArrayList<>();
+    private final List<Course> courses = new ArrayList<>();
 
     @Override
     public List<Course> getAll() {
@@ -30,7 +31,7 @@ public class CourseRepositoryArrayImpl implements CourseRepository {
     @Override
     public Optional<Course> findById(String id) {
         for (Course course : courses) {
-            if (course.getCourseId() == id) {
+            if (course.getCourseId().equals(id)) {
                 return Optional.of(course);
             }
         }
@@ -38,9 +39,25 @@ public class CourseRepositoryArrayImpl implements CourseRepository {
     }
 
     @Override
+    public Optional<List<Course>> findBy(String by, String value) throws Exception {
+        List<Course> courseList = new ArrayList<>();
+        GetMethodReflection reflection = new GetMethodReflection<Course>();
+        for (Course course : courses) {
+            String title = (String) reflection.getMethodInvoke(course, by);
+            if (title.contains(value)) {
+                courseList.add(course);
+            }
+        }
+        if (courseList.size() == 0) {
+            return Optional.empty();
+        }
+        return Optional.of(courseList);
+    }
+
+    @Override
     public void update(Course course, String id) {
         for (Course existingCourse : courses) {
-            if (existingCourse.getCourseId() == id) {
+            if (existingCourse.getCourseId().equals(id)) {
                 existingCourse.setLink(course.getLink());
                 existingCourse.setTitle(course.getTitle());
                 existingCourse.setDescription(course.getDescription());
@@ -52,7 +69,7 @@ public class CourseRepositoryArrayImpl implements CourseRepository {
     @Override
     public void delete(String id) {
         for (Course course : courses) {
-            if (course.getCourseId() == id) {
+            if (course.getCourseId().equals(id)) {
                 courses.remove(course);
                 break;
             }

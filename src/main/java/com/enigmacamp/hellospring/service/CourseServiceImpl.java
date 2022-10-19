@@ -33,8 +33,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Optional<Course> get(String id) {
-        return Optional.empty();
+    public Course get(String id) throws Exception {
+        Optional<Course> result = courseRepository.findById(id);
+        if (result.isEmpty()) {
+            throw new Exception("Course not found");
+        }
+        return result.get();
+    }
+
+    @Override
+    public List<Course> getBy(String key, String value) throws Exception {
+        Optional<List<Course>> result = courseRepository.findBy(key, value);
+        if (result.isEmpty()) {
+            throw new Exception("Course not found");
+        }
+        return result.get();
     }
 
     @Override

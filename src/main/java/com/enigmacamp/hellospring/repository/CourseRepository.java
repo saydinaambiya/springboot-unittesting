@@ -12,6 +12,8 @@ public interface CourseRepository {
 
     Optional<Course> findById(String id) throws Exception;
 
+    Optional<List<Course>> findBy(String by, String value) throws Exception;
+
     void update(Course course, String id) throws Exception;
 
     void delete(String id) throws Exception;
