@@ -5,7 +5,7 @@ import com.enigmacamp.hellospring.model.Course;
 import java.util.List;
 
 public interface CourseService {
-    List<Course> list();
+    List<Course> list() throws Exception;
 
     Course create(Course course);
 

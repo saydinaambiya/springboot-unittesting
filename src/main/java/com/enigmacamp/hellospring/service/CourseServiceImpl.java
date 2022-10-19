@@ -15,17 +15,20 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
 
     @Override
-    public List<Course> list() {
-        try {
-            return courseRepository.getAll();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public List<Course> list() throws Exception {
+        List<Course> result = courseRepository.getAll();
+        if (result.isEmpty()) {
+            throw new Exception("Course not found");
         }
+        return result;
     }
 
     @Override
     public Course create(Course course) {
         try {
+            if (!(courseRepository.getAll().size() < 5)) {
+                throw new Exception("Data is full");
+            }
             return courseRepository.create(course);
         } catch (Exception e) {
             throw new RuntimeException(e);

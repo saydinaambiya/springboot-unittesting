@@ -2,6 +2,8 @@ package com.enigmacamp.hellospring.controller;
 
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.model.request.NewCourseRequest;
+import com.enigmacamp.hellospring.model.response.ErrorResponse;
+import com.enigmacamp.hellospring.model.response.SuccessResponse;
 import com.enigmacamp.hellospring.service.CourseService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +23,23 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity getAllCourse() {
-        List<Course> courseList = courseService.list();
-        return ResponseEntity.status(HttpStatus.OK).body(courseList);
+        try {
+            List<Course> courseList = courseService.list();
+            return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
+                    courseList, "Success Get All Course"
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("X01", e.getMessage()));
+        }
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getCourse(@PathVariable String id) {
         try {
             Course result = courseService.get(id);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(result, "Success get course with id"));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("X01", e.getMessage()));
         }
     }
 
@@ -40,18 +48,26 @@ public class CourseController {
                                       @RequestParam String value) {
         try {
             List<Course> result = courseService.getBy(keyword, value);
-            return ResponseEntity.status(HttpStatus.OK).body(result);
+            return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
+                    result, "Success get course by " + keyword
+            ));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("X01", e.getMessage()));
         }
     }
 
     @PostMapping
     public ResponseEntity createCourse(@RequestBody NewCourseRequest request) {
-        Course newCourse = modelMapper.map(request, Course.class);
-        Course result = courseService.create(newCourse);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(result);
+        try {
+            Course newCourse = modelMapper.map(request, Course.class);
+            Course result = courseService.create(newCourse);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new SuccessResponse<>(
+                            result, "Success create course"
+                    ));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ErrorResponse("X02", e.getMessage()));
+        }
     }
 
 }

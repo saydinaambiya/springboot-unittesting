@@ -28,9 +28,15 @@ public class Console implements CommandLineRunner {
     }
 
     private void printResult() {
-        List<Course> courseList = courseService.list();
-        for (Course course : courseList) {
-            System.out.println(course.toString());
+        List<Course> courseList;
+        try {
+            courseList = courseService.list();
+            for (Course course : courseList) {
+                System.out.println(course.toString());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
     }
 }
