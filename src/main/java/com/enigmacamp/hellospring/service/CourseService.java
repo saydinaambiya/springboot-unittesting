@@ -7,15 +7,15 @@ import java.util.List;
 public interface CourseService {
     List<Course> list() throws Exception;
 
-    Course create(Course course);
+    Course create(Course course) throws Exception;
 
     Course get(String id) throws Exception;
 
     List<Course> getBy(String key, String value) throws Exception;
 
-    void update(Course course, String id);
+    void update(Course course, String id) throws Exception;
 
-    void delete(String id);
+    void delete(String id) throws Exception;
 
     void createBulk(List<Course> courses);
 }

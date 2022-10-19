@@ -18,12 +18,15 @@ public class Console implements CommandLineRunner {
     @Override
     public void run(String... args) {
         System.out.println("Hello Spring Boot");
-        Course course1 = new Course();
-        course1.setDescription("Spring Boot");
-        course1.setLink("https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm");
-        course1.setTitle("Spring Framework");
-
-        courseService.create(course1);
+        try {
+            Course course1 = new Course();
+            course1.setDescription("Spring Boot");
+            course1.setLink("https://www.tutorialspoint.com/spring_boot/spring_boot_introduction.htm");
+            course1.setTitle("Spring Framework");
+            courseService.create(course1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         printResult();
     }
 
