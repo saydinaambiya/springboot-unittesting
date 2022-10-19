@@ -3,6 +3,7 @@ package com.enigmacamp.hellospring.service;
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Optional;
 @Service
 public class CourseServiceImpl implements CourseService {
 
+    @Value("${course.data.length}")
+    Integer dataLength;
     @Autowired
     private CourseRepository courseRepository;
 
@@ -26,7 +29,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course create(Course course) {
         try {
-            if (!(courseRepository.getAll().size() < 5)) {
+            if (!(courseRepository.getAll().size() < dataLength)) {
                 throw new Exception("Data is full");
             }
             return courseRepository.create(course);

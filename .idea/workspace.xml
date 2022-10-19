@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5af5a58-8664-4879-a295-69f3ff128fa6" name="Changes" comment="API wiht Rest Controller">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/response/CommonResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/response/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/response/SuccessResponse.java" afterDir="false" />
+    <list default="true" id="e5af5a58-8664-4879-a295-69f3ff128fa6" name="Changes" comment="Common Response">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="02-RestApi" />
+        <entry key="$PROJECT_DIR$" value="04-Error-Handling" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -163,7 +158,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666154860255</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Common Response">
+      <created>1666170334160</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666170334160</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +186,8 @@
     <MESSAGE value="Spring Boot Hands On" />
     <MESSAGE value="Simple console and array" />
     <MESSAGE value="API wiht Rest Controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="API wiht Rest Controller" />
+    <MESSAGE value="Common Response" />
+    <option name="LAST_COMMIT_MESSAGE" value="Common Response" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
