@@ -1,8 +1,12 @@
 package com.enigmacamp.hellospring.model.request;
 
+import javax.validation.constraints.NotBlank;
+
 public class NewCourseRequest {
+    @NotBlank(message = "Title is required")
     private String title;
     private String description;
+    @NotBlank(message = "Link is required")
     private String link;
 
     public String getTitle() {
