@@ -4,17 +4,21 @@ import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.model.request.NewCourseRequest;
 import com.enigmacamp.hellospring.model.response.SuccessResponse;
 import com.enigmacamp.hellospring.service.CourseService;
+import com.enigmacamp.hellospring.util.validation.Uuid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @RestController
 @RequestMapping("/courses")
+@Validated // Kalo ada pathVariable/RequestParameter validation
 public class CourseController {
     @Autowired
     CourseService courseService;
@@ -43,13 +47,13 @@ public class CourseController {
 //    }
 
     @GetMapping("/{id}")
-    public ResponseEntity getCourse(@PathVariable String id) throws Exception {
+    public ResponseEntity getCourse(@PathVariable @Uuid String id) throws Exception {
         Course result = courseService.get(id);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(result, "Success get course with id"));
     }
 
     @GetMapping(params = {"keyword", "value"})
-    public ResponseEntity getCourseBy(@RequestParam String keyword,
+    public ResponseEntity getCourseBy(@RequestParam @NotEmpty String keyword,
                                       @RequestParam String value) throws Exception {
         List<Course> result = courseService.getBy(keyword, value);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
