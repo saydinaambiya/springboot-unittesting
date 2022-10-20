@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5af5a58-8664-4879-a295-69f3ff128fa6" name="Changes" comment="Simple JPA">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/response/PagingResponse.java" afterDir="false" />
+    <list default="true" id="e5af5a58-8664-4879-a295-69f3ff128fa6" name="Changes" comment="Pagination">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/controller/CourseTypeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/CourseInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/CourseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/request/NewCourseInfoRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/request/NewCourseTypeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/repository/CourseTypeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseTypeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseTypeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceArrayImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceArrayImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/service/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/request/NewCourseRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/enigmacamp/hellospring/model/request/NewCourseRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="06-JPA" />
+        <entry key="$PROJECT_DIR$" value="07-Paging" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,6 +70,11 @@
     "settings.editor.selected.configurable": "project.propCompiler",
     "show.migrate.to.gradle.popup": "false",
     "spring.configuration.checksum": "3afe9d6a278d3a7ad90b457087082b47"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -74,8 +85,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.enigmacamp.hellospring.repository" />
+      <recent name="com.enigmacamp.hellospring.service" />
+      <recent name="com.enigmacamp.hellospring.controller" />
+      <recent name="com.enigmacamp.hellospring.model.request" />
       <recent name="com.enigmacamp.hellospring.exception" />
-      <recent name="com.enigmacamp.hellospring.model.response" />
     </key>
   </component>
   <component name="RunManager">
@@ -147,7 +161,7 @@
       <option name="presentableId" value="Default" />
       <updated>1666141571746</updated>
       <workItem from="1666141573047" duration="4692000" />
-      <workItem from="1666222351176" duration="17280000" />
+      <workItem from="1666222351176" duration="31493000" />
     </task>
     <task id="LOCAL-00001" summary="Spring Boot Hands On">
       <created>1666144778330</created>
@@ -205,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666238527484</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Pagination">
+      <created>1666240380207</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666240380207</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,7 +252,8 @@
     <MESSAGE value="Custom Validation" />
     <MESSAGE value="Add validation on request param" />
     <MESSAGE value="Simple JPA" />
-    <option name="LAST_COMMIT_MESSAGE" value="Simple JPA" />
+    <MESSAGE value="Pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pagination" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

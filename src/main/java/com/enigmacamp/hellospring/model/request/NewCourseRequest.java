@@ -10,6 +10,10 @@ public class NewCourseRequest {
     @NotBlank(message = "{invalid.link.required}")
     private String link;
 
+    private NewCourseInfoRequest courseInfo;
+
+    private NewCourseTypeRequest courseType;
+
     public String getTitle() {
         return title;
     }
@@ -32,5 +36,21 @@ public class NewCourseRequest {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public NewCourseInfoRequest getCourseInfo() {
+        return courseInfo;
+    }
+
+    public void setCourseInfo(NewCourseInfoRequest courseInfo) {
+        this.courseInfo = courseInfo;
+    }
+
+    public NewCourseTypeRequest getCourseType() {
+        return courseType;
+    }
+
+    public void setCourseType(NewCourseTypeRequest courseType) {
+        this.courseType = courseType;
     }
 }

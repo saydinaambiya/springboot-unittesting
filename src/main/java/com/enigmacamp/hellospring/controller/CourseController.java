@@ -7,6 +7,7 @@ import com.enigmacamp.hellospring.model.response.SuccessResponse;
 import com.enigmacamp.hellospring.service.CourseService;
 import com.enigmacamp.hellospring.util.validation.Uuid;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Page;
@@ -70,7 +71,9 @@ public class CourseController {
 
     @PostMapping
     public ResponseEntity createCourse(@Valid @RequestBody NewCourseRequest request) throws Exception {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Course newCourse = modelMapper.map(request, Course.class);
+        System.out.println(newCourse.toString());
         Course result = courseService.create(newCourse);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new SuccessResponse<>(
