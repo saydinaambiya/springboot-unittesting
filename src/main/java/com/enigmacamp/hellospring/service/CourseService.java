@@ -1,10 +1,13 @@
 package com.enigmacamp.hellospring.service;
 
 import com.enigmacamp.hellospring.model.Course;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface CourseService {
+    Page<Course> list(Integer page, Integer size, String direction, String sortBy) throws Exception;
+
     List<Course> list() throws Exception;
 
     Course create(Course course) throws Exception;

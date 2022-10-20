@@ -3,9 +3,11 @@ package com.enigmacamp.hellospring.service;
 import com.enigmacamp.hellospring.exception.NotFoundException;
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.repository.CourseArrayRepository;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,11 @@ public class CourseServiceArrayImpl implements CourseService {
     Integer dataLength;
     @Autowired
     private CourseArrayRepository courseRepository;
+
+    @Override
+    public Page<Course> list(Integer page, Integer size, String direction, String sortBy) throws Exception {
+        throw new NotYetImplementedException();
+    }
 
     @Override
     public List<Course> list() throws Exception {

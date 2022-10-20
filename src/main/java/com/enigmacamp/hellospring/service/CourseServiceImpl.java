@@ -4,10 +4,15 @@ import com.enigmacamp.hellospring.exception.EntityExistException;
 import com.enigmacamp.hellospring.exception.NotFoundException;
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.repository.CourseRepository;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,13 +33,16 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> list() {
-        List<Course> courses = new ArrayList<>();
-        Iterable<Course> result = courseRepository.findAll();
-        for (Course course : result) {
-            courses.add(course);
-        }
-        return courses;
+    public Page<Course> list(Integer page, Integer size, String direction, String sortBy) {
+        Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
+        Pageable pageable = PageRequest.of((page - 1), size, sort);
+        Page<Course> result = courseRepository.findAll(pageable);
+        return result;
+    }
+
+    @Override
+    public List<Course> list() throws Exception {
+        throw new NotYetImplementedException();
     }
 
     @Override

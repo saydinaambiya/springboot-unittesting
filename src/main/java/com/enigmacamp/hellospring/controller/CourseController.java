@@ -2,12 +2,14 @@ package com.enigmacamp.hellospring.controller;
 
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.model.request.NewCourseRequest;
+import com.enigmacamp.hellospring.model.response.PagingResponse;
 import com.enigmacamp.hellospring.model.response.SuccessResponse;
 import com.enigmacamp.hellospring.service.CourseService;
 import com.enigmacamp.hellospring.util.validation.Uuid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,10 +29,13 @@ public class CourseController {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public ResponseEntity getAllCourse() throws Exception {
-        List<Course> courseList = courseService.list();
-        return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
-                courseList, "Success Get All Course"
+    public ResponseEntity getAllCourse(@RequestParam(defaultValue = "1") Integer page,
+                                       @RequestParam(defaultValue = "5") Integer size,
+                                       @RequestParam(defaultValue = "DESC") String direction,
+                                       @RequestParam(defaultValue = "courseId") String sortBy) throws Exception {
+        Page<Course> courseList = courseService.list(page, size, direction, sortBy);
+        return ResponseEntity.status(HttpStatus.OK).body(new PagingResponse<>(
+                courseList, "Success get course list"
         ));
     }
 
@@ -58,8 +63,6 @@ public class CourseController {
     public ResponseEntity getCourseBy(@RequestParam @NotBlank(message = "{invalid.keyword.required}") String keyword,
                                       @RequestParam String value) throws Exception {
         List<Course> result = courseService.getBy(keyword, value);
-        System.out.println("======");
-        System.out.println(result);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
                 result, "Success get course by " + keyword
         ));
