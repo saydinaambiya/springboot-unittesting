@@ -4,6 +4,7 @@ import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.util.GetMethodReflection;
 import com.enigmacamp.hellospring.util.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class CourseRepositoryArrayImpl implements CourseRepository {
+@Profile("console")
+public class CourseRepositoryArrayImpl implements CourseArrayRepository {
     @Autowired
     RandomStringGenerator randomStringGenerator;
     private final List<Course> courses = new ArrayList<>();

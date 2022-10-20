@@ -1,5 +1,6 @@
 package com.enigmacamp.hellospring.controller;
 
+import com.enigmacamp.hellospring.exception.EntityExistException;
 import com.enigmacamp.hellospring.exception.NotFoundException;
 import com.enigmacamp.hellospring.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,13 @@ import java.util.Set;
 
 @RestControllerAdvice
 public class ErrorController {
+
+    @ExceptionHandler(EntityExistException.class)
+    ResponseEntity<ErrorResponse> handleEntityExistViolationException(EntityExistException exception) {
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new ErrorResponse("X03", exception.getMessage()));
+    }
     @ExceptionHandler(ConstraintViolationException.class)
     ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException exception) {
         Set<ConstraintViolation<?>> violation = exception.getConstraintViolations();

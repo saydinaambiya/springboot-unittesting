@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @RestController
@@ -59,6 +58,8 @@ public class CourseController {
     public ResponseEntity getCourseBy(@RequestParam @NotBlank(message = "{invalid.keyword.required}") String keyword,
                                       @RequestParam String value) throws Exception {
         List<Course> result = courseService.getBy(keyword, value);
+        System.out.println("======");
+        System.out.println(result);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
                 result, "Success get course by " + keyword
         ));
