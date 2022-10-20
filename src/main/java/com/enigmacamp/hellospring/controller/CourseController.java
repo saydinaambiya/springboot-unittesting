@@ -7,12 +7,14 @@ import com.enigmacamp.hellospring.service.CourseService;
 import com.enigmacamp.hellospring.util.validation.Uuid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -53,7 +55,8 @@ public class CourseController {
     }
 
     @GetMapping(params = {"keyword", "value"})
-    public ResponseEntity getCourseBy(@RequestParam @NotEmpty String keyword,
+    @Order(1)
+    public ResponseEntity getCourseBy(@RequestParam @NotBlank(message = "{invalid.keyword.required}") String keyword,
                                       @RequestParam String value) throws Exception {
         List<Course> result = courseService.getBy(keyword, value);
         return ResponseEntity.status(HttpStatus.OK).body(new SuccessResponse<>(
