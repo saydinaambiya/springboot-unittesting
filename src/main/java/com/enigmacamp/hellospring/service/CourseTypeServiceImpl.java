@@ -3,6 +3,7 @@ package com.enigmacamp.hellospring.service;
 import com.enigmacamp.hellospring.exception.EntityExistException;
 import com.enigmacamp.hellospring.model.CourseType;
 import com.enigmacamp.hellospring.repository.CourseTypeRepository;
+import com.enigmacamp.hellospring.repository.projection.CourseTypeView;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,10 +26,18 @@ public class CourseTypeServiceImpl implements CourseTypeService {
 
 
     @Override
-    public Page<CourseType> list(Integer page, Integer size, String direction, String sortBy) throws Exception {
+    public Page<CourseType> listWithCourses(Integer page, Integer size, String direction, String sortBy) throws Exception {
         Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
         Pageable pageable = PageRequest.of((page - 1), size, sort);
         Page<CourseType> result = courseTypeRepository.findAll(pageable);
+        return result;
+    }
+
+    @Override
+    public Page<CourseTypeView> list(Integer page, Integer size, String direction, String sortBy) throws Exception {
+        Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
+        Pageable pageable = PageRequest.of((page - 1), size, sort);
+        Page<CourseTypeView> result = courseTypeRepository.findOnlyCourse(pageable);
         return result;
     }
 

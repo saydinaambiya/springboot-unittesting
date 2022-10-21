@@ -1,5 +1,6 @@
 package com.enigmacamp.hellospring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Course {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_type_id",referencedColumnName = "course_type_id")
+    @JsonIgnoreProperties({"courseList"})
     private CourseType courseType;
 
     public String getCourseId() {

@@ -4,6 +4,9 @@ import com.enigmacamp.hellospring.exception.EntityExistException;
 import com.enigmacamp.hellospring.exception.NotFoundException;
 import com.enigmacamp.hellospring.model.Course;
 import com.enigmacamp.hellospring.repository.CourseRepository;
+import com.enigmacamp.hellospring.repository.spec.CourseSpecification;
+import com.enigmacamp.hellospring.repository.spec.SearchCriteria;
+import com.enigmacamp.hellospring.util.QueryOperator;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -66,14 +70,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getBy(String key, String value) {
-        switch (key) {
-            case "title":
-                return courseRepository.findByTitleContains(value);
-            case "description":
-                return courseRepository.findByDescriptionContains(value);
-            default:
-                return courseRepository.findAll();
+        Specification spec = new CourseSpecification(new SearchCriteria(key, QueryOperator.LIKE, value));
+        List result = courseRepository.findAll(spec);
+        if (result.isEmpty()) {
+            throw new NotFoundException("Course not found");
         }
+        return result;
     }
 
     @Override

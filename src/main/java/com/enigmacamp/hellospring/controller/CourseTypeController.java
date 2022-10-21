@@ -4,6 +4,7 @@ import com.enigmacamp.hellospring.model.CourseType;
 import com.enigmacamp.hellospring.model.request.NewCourseTypeRequest;
 import com.enigmacamp.hellospring.model.response.PagingResponse;
 import com.enigmacamp.hellospring.model.response.SuccessResponse;
+import com.enigmacamp.hellospring.repository.projection.CourseTypeView;
 import com.enigmacamp.hellospring.service.CourseTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,22 @@ public class CourseTypeController {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public ResponseEntity getAllCourse(@RequestParam(defaultValue = "1") Integer page,
-                                       @RequestParam(defaultValue = "5") Integer size,
-                                       @RequestParam(defaultValue = "DESC") String direction,
-                                       @RequestParam(defaultValue = "courseTypeId") String sortBy) throws Exception {
-        Page<CourseType> courseTypeList = courseTypeService.list(page, size, direction, sortBy);
+    public ResponseEntity getAllCourseType(@RequestParam(defaultValue = "1") Integer page,
+                                           @RequestParam(defaultValue = "5") Integer size,
+                                           @RequestParam(defaultValue = "DESC") String direction,
+                                           @RequestParam(defaultValue = "courseTypeId") String sortBy) throws Exception {
+        Page<CourseTypeView> courseTypeList = courseTypeService.list(page, size, direction, sortBy);
+        return ResponseEntity.status(HttpStatus.OK).body(new PagingResponse<>(
+                courseTypeList, "Success get course type list"
+        ));
+    }
+
+    @GetMapping("/course-list")
+    public ResponseEntity getAllCourseTypeWithCourseList(@RequestParam(defaultValue = "1") Integer page,
+                                                         @RequestParam(defaultValue = "5") Integer size,
+                                                         @RequestParam(defaultValue = "DESC") String direction,
+                                                         @RequestParam(defaultValue = "courseTypeId") String sortBy) throws Exception {
+        Page<CourseType> courseTypeList = courseTypeService.listWithCourses(page, size, direction, sortBy);
         return ResponseEntity.status(HttpStatus.OK).body(new PagingResponse<>(
                 courseTypeList, "Success get course type list"
         ));
