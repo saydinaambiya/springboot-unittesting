@@ -73,7 +73,6 @@ public class CourseController {
     public ResponseEntity createCourse(@Valid @RequestBody NewCourseRequest request) throws Exception {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Course newCourse = modelMapper.map(request, Course.class);
-        System.out.println(newCourse.toString());
         Course result = courseService.create(newCourse);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new SuccessResponse<>(

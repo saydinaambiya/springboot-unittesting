@@ -37,7 +37,7 @@ public class CourseTypeServiceImpl implements CourseTypeService {
     public Page<CourseTypeView> list(Integer page, Integer size, String direction, String sortBy) throws Exception {
         Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
         Pageable pageable = PageRequest.of((page - 1), size, sort);
-        Page<CourseTypeView> result = courseTypeRepository.findOnlyCourse(pageable);
+        Page<CourseTypeView> result = courseTypeRepository.findOnlyCourseType(pageable);
         return result;
     }
 

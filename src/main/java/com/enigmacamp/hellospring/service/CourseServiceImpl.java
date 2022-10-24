@@ -3,7 +3,9 @@ package com.enigmacamp.hellospring.service;
 import com.enigmacamp.hellospring.exception.EntityExistException;
 import com.enigmacamp.hellospring.exception.NotFoundException;
 import com.enigmacamp.hellospring.model.Course;
+import com.enigmacamp.hellospring.model.CourseType;
 import com.enigmacamp.hellospring.repository.CourseRepository;
+import com.enigmacamp.hellospring.repository.CourseTypeRepository;
 import com.enigmacamp.hellospring.repository.spec.CourseSpecification;
 import com.enigmacamp.hellospring.repository.spec.SearchCriteria;
 import com.enigmacamp.hellospring.util.QueryOperator;
@@ -28,19 +30,22 @@ import java.util.Optional;
 public class CourseServiceImpl implements CourseService {
 
     private CourseRepository courseRepository;
+    private CourseTypeRepository courseTypeRepository;
 
     @Autowired
     ModelMapper modelMapper;
 
-    public CourseServiceImpl(@Autowired CourseRepository courseRepository) {
+    public CourseServiceImpl(@Autowired CourseRepository courseRepository, @Autowired CourseTypeRepository courseTypeRepository) {
         this.courseRepository = courseRepository;
+        this.courseTypeRepository = courseTypeRepository;
     }
 
     @Override
     public Page<Course> list(Integer page, Integer size, String direction, String sortBy) {
         Sort sort = Sort.by(Sort.Direction.valueOf(direction), sortBy);
         Pageable pageable = PageRequest.of((page - 1), size, sort);
-        Page<Course> result = courseRepository.findAll(pageable);
+//        Page<Course> result = courseRepository.findAll(pageable);
+        Page<Course> result = courseRepository.findWithInfoAndType(pageable);
         return result;
     }
 
@@ -52,6 +57,12 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course create(Course course) {
         try {
+            Optional<CourseType> courseType = courseTypeRepository.findById(course.getCourseType().getCourseTypeId());
+            if (courseType.isEmpty()) {
+                throw new NotFoundException("No course type");
+            }
+
+            course.setCourseType(courseType.get());
             Course newCourse = courseRepository.save(course);
             return newCourse;
         } catch (DataIntegrityViolationException e) {

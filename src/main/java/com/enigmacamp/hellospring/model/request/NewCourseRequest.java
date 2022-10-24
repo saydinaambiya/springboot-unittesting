@@ -12,7 +12,7 @@ public class NewCourseRequest {
 
     private NewCourseInfoRequest courseInfo;
 
-    private NewCourseTypeRequest courseType;
+    private CourseTypeIdRequest courseType;
 
     public String getTitle() {
         return title;
@@ -46,11 +46,11 @@ public class NewCourseRequest {
         this.courseInfo = courseInfo;
     }
 
-    public NewCourseTypeRequest getCourseType() {
+    public CourseTypeIdRequest getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(NewCourseTypeRequest courseType) {
+    public void setCourseType(CourseTypeIdRequest courseType) {
         this.courseType = courseType;
     }
 }

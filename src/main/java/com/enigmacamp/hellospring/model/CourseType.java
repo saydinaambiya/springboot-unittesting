@@ -7,6 +7,23 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NamedEntityGraph(name = "CourseType_With_Course_And_Info",
+        attributeNodes = {
+                @NamedAttributeNode(
+                        value = "courseList",
+                        subgraph = "info-subgraph"
+                )
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "info-subgraph",
+                        attributeNodes =
+                                {
+                                        @NamedAttributeNode("courseInfo")
+                                }
+                )
+        }
+)
 @Table(name = "mst_course_type")
 public class CourseType {
     @Id
@@ -18,6 +35,8 @@ public class CourseType {
     @Column(name = "type_name", nullable = false, length = 150, unique = true)
     private String typeName;
 
+    //Default Lazy
+//    @OneToMany(mappedBy = "courseType",fetch = FetchType.EAGER)
     @OneToMany(mappedBy = "courseType")
     @JsonIgnoreProperties({"courseType"})
     private List<Course> courseList;

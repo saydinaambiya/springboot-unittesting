@@ -6,6 +6,16 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
+@NamedEntityGraph(name = "Course_With_CourseType_And_Info",
+        attributeNodes = {
+                @NamedAttributeNode(
+                        value = "courseInfo"
+                ),
+                @NamedAttributeNode(
+                        value = "courseType"
+                )
+        }
+)
 @Table(name = "mst_course")
 public class Course {
     @Id
@@ -24,8 +34,8 @@ public class Course {
     @JoinColumn(name = "course_info_id", referencedColumnName = "course_info_id")
     private CourseInfo courseInfo;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "course_type_id",referencedColumnName = "course_type_id")
+    @ManyToOne
+    @JoinColumn(name = "course_type_id", referencedColumnName = "course_type_id", nullable = false)
     @JsonIgnoreProperties({"courseList"})
     private CourseType courseType;
 
