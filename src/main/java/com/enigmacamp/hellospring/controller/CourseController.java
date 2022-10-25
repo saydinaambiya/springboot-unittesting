@@ -74,6 +74,7 @@ public class CourseController {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Course newCourse = modelMapper.map(request, Course.class);
         Course result = courseService.create(newCourse);
+        System.out.println(result);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new SuccessResponse<>(
                         result, "Success create course"
