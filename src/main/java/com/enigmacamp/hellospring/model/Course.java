@@ -6,16 +6,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@NamedEntityGraph(name = "Course_With_CourseType_And_Info",
-        attributeNodes = {
-                @NamedAttributeNode(
-                        value = "courseInfo"
-                ),
-                @NamedAttributeNode(
-                        value = "courseType"
-                )
-        }
-)
 @Table(name = "mst_course")
 public class Course {
     @Id

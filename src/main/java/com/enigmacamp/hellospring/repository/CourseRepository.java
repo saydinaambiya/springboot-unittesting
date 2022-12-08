@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, String>, JpaSpecificationExecutor {
 
-    @EntityGraph(value = "Course_With_CourseType_And_Info", type = EntityGraph.EntityGraphType.LOAD)
+//    @EntityGraph(value = "Course_With_CourseType_And_Info", type = EntityGraph.EntityGraphType.LOAD)
     List<Course> findAll(Specification specification);
 
     @Query(value = "from Course c join fetch c.courseInfo join fetch c.courseType", countQuery = "select count(i) from Course i")

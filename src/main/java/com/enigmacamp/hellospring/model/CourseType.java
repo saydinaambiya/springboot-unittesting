@@ -7,23 +7,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedEntityGraph(name = "CourseType_With_Course_And_Info",
-        attributeNodes = {
-                @NamedAttributeNode(
-                        value = "courseList",
-                        subgraph = "info-subgraph"
-                )
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "info-subgraph",
-                        attributeNodes =
-                                {
-                                        @NamedAttributeNode("courseInfo")
-                                }
-                )
-        }
-)
 @Table(name = "mst_course_type")
 public class CourseType {
     @Id
